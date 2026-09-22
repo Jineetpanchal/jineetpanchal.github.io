@@ -42,6 +42,16 @@ const WORK_ITEMS = [
     src: "",
     link: "https://northnest.atoms.world"
   },
+   {
+  type: "site",
+  category: "Web Projects",
+  client: "SattvaMunch",
+  title: "Full brand system, 3D-driven website & investor deck",
+  description: "A complete brand build for a concept organic snack company — positioning, visual identity, a 4-flavor global campaign, a 3D-animated website with a real interactive product model, a finished brand film, and an investor pitch deck. Built end-to-end to demonstrate strategy, design, and web development together in one project.",
+  thumb: "assets/img/work/site-sattvamunch.jpg",
+  src: "",
+  link: "https://sattvamunch.ai.studio/"
+},
 
   // ---------- VIDEO EDITS ----------
   {
