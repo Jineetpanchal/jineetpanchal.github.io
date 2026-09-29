@@ -118,8 +118,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const isSite = item.type === 'site';
 
       card.innerHTML = `
-        <div class="work-thumb">
-          <img src="${item.thumb}" alt="${item.title} — ${item.client}" loading="lazy">
+                <div class="work-thumb">
+          ${item.thumbVideo
+            ? `<video src="${item.thumbVideo}" poster="${item.thumb}" autoplay muted loop playsinline webkit-playsinline></video>`
+            : `<img src="${item.thumb}" alt="${item.title} — ${item.client}" loading="lazy">`
+          }
           ${isVideo ? '<div class="play"><div class="play-icon"></div></div>' : ''}
           <span class="work-cat-badge">${item.category}</span>
         </div>
