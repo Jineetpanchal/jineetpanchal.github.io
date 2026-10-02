@@ -302,8 +302,8 @@ nav a:hover{ color: var(--paper); }
 @keyframes cardIn{ to{ opacity: 1; transform: translateY(0); } }
 .work-card:hover{ border-color: var(--brass); box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); }
 .work-thumb{ position: relative; aspect-ratio: 4/3; overflow: hidden; background: var(--ink-3); }
-.work-thumb img{ width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
-.work-card:hover .work-thumb img{ transform: scale(1.06); }
+.work-thumb img, .work-thumb video{ width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+.work-card:hover .work-thumb img, .work-card:hover .work-thumb video{ transform: scale(1.06); }
 .work-thumb .play{
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   background: rgba(18,20,28,.15);
