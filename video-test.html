@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>SattvaMunch video diagnostic</title>
+<style>
+  body{font-family:-apple-system,system-ui,sans-serif;margin:0;padding:16px;background:#f5efe0;color:#3b2314;line-height:1.4}
+  h1{font-size:20px;margin:0 0 4px}
+  h2{font-size:16px;margin:24px 0 6px}
+  video{width:100%;background:#000;border-radius:8px;display:block}
+  pre{background:#fff;border:1px solid #e0d6c0;border-radius:8px;padding:10px;font-size:12px;white-space:pre-wrap;word-break:break-word}
+  .note{font-size:13px;opacity:.8}
+</style>
+</head>
+<body>
+<h1>SattvaMunch video diagnostic</h1>
+<p class="note">Open on each device. Tap play on Test A and Test B, wait ~10 seconds, then screenshot the whole page.</p>
+<pre id="env"></pre>
+
+<h2>Test A: video served by the live site (sattvamunch.ai.studio)</h2>
+<video id="vA" controls playsinline preload="metadata" src="https://sattvamunch.ai.studio/assets/commercial-v2.mp4"></video>
+<pre id="sA">waiting...</pre>
+
+<h2>Test B: same file served from GitHub Pages</h2>
+<video id="vB" controls playsinline preload="metadata" src="assets/video/sattvamunch-commercial.mp4"></video>
+<pre id="sB">waiting...</pre>
+
+<h2>Range-request check (Test B file)</h2>
+<pre id="range">running...</pre>
+
+<script>
+var ERR = {1:'ABORTED (1)', 2:'NETWORK (2)', 3:'DECODE (3)', 4:'SRC_NOT_SUPPORTED (4)'};
+document.getElementById('env').textContent =
+  'Device: ' + navigator.userAgent + '\nScreen: ' + screen.width + 'x' + screen.height + '\nTime: ' + new Date().toString();
+
+function watch(v, out) {
+  var log = [];
+  function add(m) { log.push((performance.now()/1000).toFixed(1) + 's ' + m); if (log.length > 8) log.shift(); render(); }
+  function render() {
+    var e = v.error ? (ERR[v.error.code] || ('code ' + v.error.code)) + (v.error.message ? ' - ' + v.error.message : '') : 'none';
+    out.textContent =
+      'duration: ' + (isFinite(v.duration) ? v.duration.toFixed(1) + 's' : v.duration) +
+      '\ncurrentTime: ' + v.currentTime.toFixed(1) + 's' +
+      '\nreadyState: ' + v.readyState + '   networkState: ' + v.networkState +
+      '\nerror: ' + e +
+      '\nevents:\n' + log.join('\n');
+  }
+  ['loadstart','loadedmetadata','loadeddata','canplay','playing','pause','waiting','stalled','suspend','abort','error','ended']
+    .forEach(function (n) { v.addEventListener(n, function () { add(n); }); });
+  setInterval(render, 1000); render();
+}
+watch(document.getElementById('vA'), document.getElementById('sA'));
+watch(document.getElementById('vB'), document.getElementById('sB'));
+
+fetch('assets/video/sattvamunch-commercial.mp4', { headers: { Range: 'bytes=0-1' } })
+  .then(function (r) {
+    document.getElementById('range').textContent =
+      'Status: ' + r.status + (r.status === 206 ? '  OK, ranges supported' : '  NOT supported (expected 206)') +
+      '\nContent-Type: ' + r.headers.get('content-type') +
+      '\nAccept-Ranges: ' + r.headers.get('accept-ranges') +
+      '\nContent-Range: ' + r.headers.get('content-range');
+  })
+  .catch(function (e) { document.getElementById('range').textContent = 'Fetch failed: ' + e; });
+</script>
+</body>
+</html>
