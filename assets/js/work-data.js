@@ -7,7 +7,7 @@
    Save this file and re-upload it — no other file needs to change.
 
    FIELDS
-   - type: "image" | "video" | "site"
+   - type: "image" | "video" | "site" | "carousel"
    - category: "Graphic Design" | "Video Edits" | "Web Projects"
    - client: the brand/company name
    - title: short title for the piece
@@ -17,6 +17,9 @@
           for "video" — path to the video file
           for "site"  — leave as "" (not used)
    - link: for "site" — the live URL. For image/video, leave as ""
+   - slides: for "carousel" only — array of image paths, in order.
+             Shows as a full-width strip card; click opens a swipeable viewer.
+   - note: optional small italic line under the description (e.g. confidentiality note)
    ============================================================ */
 
 const WORK_ITEMS = [
@@ -72,6 +75,22 @@ const WORK_ITEMS = [
     description: "Vertical recap edit of a community dental check-up camp run at a school — shot coverage cut into a fast, reels-ready story.",
     thumb: "assets/img/work/dental-solution-camp-poster.jpg",
     src: "assets/video/dental-solution-camp.mp4"
+  },
+
+  // ---------- GRAPHIC DESIGN — Canadian market work ----------
+  {
+    type: "carousel",
+    category: "Graphic Design",
+    client: "Zolar Technology & MFG (Canada)",
+    title: "Instagram carousel — painless laser dentistry",
+    description: "A 4-slide social media carousel created for Zolar Technology, a Canadian dental-technology company. It moves from an emotional hook (\"What if dental treatments didn't hurt?\") to benefits, outcomes and a booking call to action, built around the brand's blue palette and logo.",
+    thumb: "assets/img/work/zolar/zolar-01.jpg",
+    slides: [
+      "assets/img/work/zolar/zolar-01.jpg",
+      "assets/img/work/zolar/zolar-02.jpg",
+      "assets/img/work/zolar/zolar-03.jpg",
+      "assets/img/work/zolar/zolar-04.jpg"
+    ]
   },
 
   // ---------- GRAPHIC DESIGN — Satyam Dental Care & Implant Center ----------

@@ -116,24 +116,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const isVideo = item.type === 'video';
       const isSite = item.type === 'site';
+      const isCarousel = item.type === 'carousel';
+      if (isCarousel) card.classList.add('work-card-wide');
 
-      card.innerHTML = `
-                <div class="work-thumb">
-          ${item.thumbVideo
+      const thumbHTML = isCarousel
+        ? `<div class="work-strip">${item.slides.map((src, n) => `<img src="${src}" alt="${item.title} — slide ${n+1} of ${item.slides.length}" loading="lazy">`).join('')}</div>`
+        : `${item.thumbVideo
             ? `<video src="${item.thumbVideo}" poster="${item.thumb}" autoplay muted loop playsinline webkit-playsinline></video>`
             : `<img src="${item.thumb}" alt="${item.title} — ${item.client}" loading="lazy">`
           }
           ${isVideo ? '<div class="play"><div class="play-icon"></div></div>' : ''}
-          <span class="work-cat-badge">${item.category}</span>
+          <span class="work-cat-badge">${item.category}</span>`;
+
+      card.innerHTML = `
+        <div class="work-thumb${isCarousel ? ' work-thumb-strip' : ''}">
+          ${thumbHTML}
         </div>
         <div class="work-body">
           <div class="work-client">${item.client}</div>
           <div class="work-title">${item.title}</div>
           <p class="work-desc">${item.description}</p>
+          ${isCarousel ? `<span class="work-visit">${item.slides.length} slides — tap any slide to view full-size</span>` : ''}
+          ${item.note ? `<p class="work-note">${item.note}</p>` : ''}
           ${isSite ? `<span class="work-visit">Visit live site →</span>` : ''}
         </div>
       `;
-      applyTilt(card, 5);
+      if (isCarousel) {
+        card.querySelectorAll('.work-strip img').forEach((img, n) => {
+          img.addEventListener('click', (e) => { e.stopPropagation(); openLightbox(item, n); });
+        });
+      }
+      if (!isCarousel) applyTilt(card, 5);
       card.addEventListener('click', () => openLightbox(item));
       grid.appendChild(card);
 
@@ -160,14 +173,51 @@ document.addEventListener('DOMContentLoaded', () => {
   const lbDesc = document.querySelector('.lb-info p');
   const lbClose = document.querySelector('.lb-close');
 
-  function openLightbox(item){
+  let slideIndex = 0;
+  let activeSlides = null;
+
+  function showSlide(i){
+    slideIndex = (i + activeSlides.length) % activeSlides.length;
+    const img = lbMedia.querySelector('img.lb-slide');
+    img.src = activeSlides[slideIndex];
+    lbMedia.querySelectorAll('.lb-dot').forEach((d, n) => d.classList.toggle('active', n === slideIndex));
+    lbMedia.querySelector('.lb-count').textContent = `${slideIndex + 1} / ${activeSlides.length}`;
+  }
+
+  function openLightbox(item, startAt = 0){
     if (item.type === 'site') {
       window.open(item.link, '_blank', 'noopener');
       return;
     }
-    lbMedia.innerHTML = item.type === 'video'
-      ? `<video src="${item.src}" controls autoplay playsinline></video>`
-      : `<img src="${item.src}" alt="${item.title}">`;
+    activeSlides = null;
+    if (item.type === 'carousel') {
+      activeSlides = item.slides;
+      lbMedia.innerHTML = `
+        <img class="lb-slide" alt="${item.title}">
+        <button class="lb-arrow lb-prev" aria-label="Previous slide">‹</button>
+        <button class="lb-arrow lb-next" aria-label="Next slide">›</button>
+        <div class="lb-count"></div>
+        <div class="lb-dots">${item.slides.map((_, n) => `<button class="lb-dot" aria-label="Go to slide ${n+1}"></button>`).join('')}</div>`;
+      lbMedia.classList.add('lb-carousel');
+      lbMedia.querySelector('.lb-prev').addEventListener('click', (e) => { e.stopPropagation(); showSlide(slideIndex - 1); });
+      lbMedia.querySelector('.lb-next').addEventListener('click', (e) => { e.stopPropagation(); showSlide(slideIndex + 1); });
+      lbMedia.querySelectorAll('.lb-dot').forEach((d, n) => d.addEventListener('click', (e) => { e.stopPropagation(); showSlide(n); }));
+      // touch swipe
+      let startX = null;
+      lbMedia.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+      lbMedia.addEventListener('touchend', (e) => {
+        if (startX === null) return;
+        const dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 40) showSlide(slideIndex + (dx < 0 ? 1 : -1));
+        startX = null;
+      });
+      showSlide(startAt);
+    } else {
+      lbMedia.classList.remove('lb-carousel');
+      lbMedia.innerHTML = item.type === 'video'
+        ? `<video src="${item.src}" controls autoplay playsinline></video>`
+        : `<img src="${item.src}" alt="${item.title}">`;
+    }
     lbClient.textContent = item.client;
     lbTitle.textContent = item.title;
     lbDesc.textContent = item.description;
@@ -178,10 +228,16 @@ document.addEventListener('DOMContentLoaded', () => {
     lightbox.classList.remove('open');
     document.body.classList.remove('lock');
     lbMedia.innerHTML = '';
+    lbMedia.classList.remove('lb-carousel');
+    activeSlides = null;
   }
   lbClose.addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+    if (activeSlides && e.key === 'ArrowRight') showSlide(slideIndex + 1);
+    if (activeSlides && e.key === 'ArrowLeft') showSlide(slideIndex - 1);
+  });
 
   /* ---------- TIMELINE SVG HEIGHT SYNC ---------- */
   const timelineEl = document.querySelector('.timeline');
