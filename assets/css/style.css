@@ -394,3 +394,9 @@ footer p{ font-family: var(--font-mono); font-size: 11.5px; color: var(--slate);
 .lb-dots{ position: absolute; bottom: 12px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; }
 .lb-dot{ width: 8px; height: 8px; border-radius: 50%; background: rgba(243,240,232,.35); border: 0; padding: 0; }
 .lb-dot.active{ background: var(--brass); }
+
+/* ---------- DOCUMENT STRIP (portrait pages, scrolls sideways) ---------- */
+.work-thumb-doc{ overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-color: var(--brass) var(--ink-2); }
+.work-thumb-doc .work-strip{ display: flex; gap: 12px; width: max-content; }
+.work-thumb-doc .work-strip img{ width: 260px; flex: 0 0 260px; aspect-ratio: 8.5/11; object-fit: contain; background: #fff; }
+@media (max-width: 600px){ .work-thumb-doc .work-strip img{ width: 72vw; flex: 0 0 72vw; } }

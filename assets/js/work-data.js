@@ -19,10 +19,40 @@
    - link: for "site" — the live URL. For image/video, leave as ""
    - slides: for "carousel" only — array of image paths, in order.
              Shows as a full-width strip card; click opens a swipeable viewer.
+   - layout: for "carousel" — set to "doc" for portrait document pages (scrolling strip of pages)
    - note: optional small italic line under the description (e.g. confidentiality note)
    ============================================================ */
 
 const WORK_ITEMS = [
+
+  // ---------- MARKETING STRATEGY ----------
+  {
+    type: "carousel",
+    layout: "doc",
+    category: "Marketing Strategy",
+    client: "Zolar Technology & MFG (Canada)",
+    title: "3-month marketing plan — Month 1 in detail",
+    description: "A marketing plan prepared for Zolar Technology, a Canadian dental and veterinary laser manufacturer. Month 1 is laid out in detail: platform audit, content pillars, weekly content calendar, paid media, creative production, KPIs, budget, and a week-by-week execution plan. A contents page at the front shows what is covered.",
+    note: "Sections 4, 5, 7 and 8 (content calendar, paid advertising, KPIs and budget) are blurred because they contain company-specific schedules, ad budgets and performance targets. Full plan available to discuss in conversation.",
+    thumb: "assets/img/work/zolar-strategy/zolar-strategy-01.jpg",
+    slides: [
+      "assets/img/work/zolar-strategy/zolar-strategy-01.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-02.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-03.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-04.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-05.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-06.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-07.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-08.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-09.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-10.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-11.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-12.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-13.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-14.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-15.jpg"
+    ]
+  },
 
   // ---------- WEB PROJECTS ----------
   {

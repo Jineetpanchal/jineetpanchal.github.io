@@ -129,14 +129,14 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="work-cat-badge">${item.category}</span>`;
 
       card.innerHTML = `
-        <div class="work-thumb${isCarousel ? ' work-thumb-strip' : ''}">
+        <div class="work-thumb${isCarousel ? ' work-thumb-strip' : ''}${item.layout === 'doc' ? ' work-thumb-doc' : ''}">
           ${thumbHTML}
         </div>
         <div class="work-body">
           <div class="work-client">${item.client}</div>
           <div class="work-title">${item.title}</div>
           <p class="work-desc">${item.description}</p>
-          ${isCarousel ? `<span class="work-visit">${item.slides.length} slides — tap any slide to view full-size</span>` : ''}
+          ${isCarousel ? `<span class="work-visit">${item.layout === 'doc' ? item.slides.length + ' pages — scroll sideways, tap any page to read' : item.slides.length + ' slides — tap any slide to view full-size'}</span>` : ''}
           ${item.note ? `<p class="work-note">${item.note}</p>` : ''}
           ${isSite ? `<span class="work-visit">Visit live site →</span>` : ''}
         </div>
