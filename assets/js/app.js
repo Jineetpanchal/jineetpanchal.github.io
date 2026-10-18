@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isCarousel) card.classList.add('work-card-wide');
 
       const thumbHTML = isCarousel
-        ? `<div class="work-strip">${item.slides.map((src, n) => `<img src="${src}" alt="${item.title} — slide ${n+1} of ${item.slides.length}" loading="lazy">`).join('')}</div>`
+        ? `<div class="work-strip">${item.slides.map((src, n) => `<img src="${src}"${item.aspect ? ` style="aspect-ratio:${item.aspect}"` : ''} alt="${item.title} — slide ${n+1} of ${item.slides.length}" loading="lazy">`).join('')}</div>`
         : `${item.thumbVideo
             ? `<video src="${item.thumbVideo}" poster="${item.thumb}" autoplay muted loop playsinline webkit-playsinline></video>`
             : `<img src="${item.thumb}" alt="${item.title} — ${item.client}" loading="lazy">`

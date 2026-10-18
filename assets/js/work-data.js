@@ -19,40 +19,12 @@
    - link: for "site" — the live URL. For image/video, leave as ""
    - slides: for "carousel" only — array of image paths, in order.
              Shows as a full-width strip card; click opens a swipeable viewer.
+   - aspect: optional CSS aspect ratio for document pages, e.g. "1000 / 1415" (A4)
    - layout: for "carousel" — set to "doc" for portrait document pages (scrolling strip of pages)
    - note: optional small italic line under the description (e.g. confidentiality note)
    ============================================================ */
 
 const WORK_ITEMS = [
-
-  // ---------- MARKETING STRATEGY ----------
-  {
-    type: "carousel",
-    layout: "doc",
-    category: "Marketing Strategy",
-    client: "Zolar Technology & MFG (Canada)",
-    title: "3-month marketing plan — Month 1 in detail",
-    description: "A marketing plan prepared for Zolar Technology, a Canadian dental and veterinary laser manufacturer. Month 1 is laid out in detail: platform audit, content pillars, weekly content calendar, paid media, creative production, KPIs, budget, and a week-by-week execution plan. A contents page at the front shows what is covered.",
-    note: "Sections 4, 5, 7 and 8 (content calendar, paid advertising, KPIs and budget) are blurred because they contain company-specific schedules, ad budgets and performance targets. Full plan available to discuss in conversation.",
-    thumb: "assets/img/work/zolar-strategy/zolar-strategy-01.jpg",
-    slides: [
-      "assets/img/work/zolar-strategy/zolar-strategy-01.jpg",
-      "assets/img/work/zolar-strategy/zolar-strategy-02.jpg",
-      "assets/img/work/zolar-strategy/zolar-strategy-03.jpg",
-      "assets/img/work/zolar-strategy/zolar-strategy-04.jpg",
-      "assets/img/work/zolar-strategy/zolar-strategy-05.jpg",
-      "assets/img/work/zolar-strategy/zolar-strategy-06.jpg",
-      "assets/img/work/zolar-strategy/zolar-strategy-07.jpg",
-      "assets/img/work/zolar-strategy/zolar-strategy-08.jpg",
-      "assets/img/work/zolar-strategy/zolar-strategy-09.jpg",
-      "assets/img/work/zolar-strategy/zolar-strategy-10.jpg",
-      "assets/img/work/zolar-strategy/zolar-strategy-11.jpg",
-      "assets/img/work/zolar-strategy/zolar-strategy-12.jpg",
-      "assets/img/work/zolar-strategy/zolar-strategy-13.jpg",
-      "assets/img/work/zolar-strategy/zolar-strategy-14.jpg",
-      "assets/img/work/zolar-strategy/zolar-strategy-15.jpg"
-    ]
-  },
 
   // ---------- WEB PROJECTS ----------
   {
@@ -105,6 +77,73 @@ const WORK_ITEMS = [
     description: "Vertical recap edit of a community dental check-up camp run at a school — shot coverage cut into a fast, reels-ready story.",
     thumb: "assets/img/work/dental-solution-camp-poster.jpg",
     src: "assets/video/dental-solution-camp.mp4"
+  },
+
+  // ---------- MARKETING STRATEGY ----------
+  {
+    type: "carousel",
+    layout: "doc",
+    category: "Marketing Strategy",
+    client: "Zolar Technology & MFG (Canada)",
+    title: "3-month marketing plan — Month 1 in detail",
+    description: "A marketing plan prepared for Zolar Technology, a Canadian dental and veterinary laser manufacturer. Month 1 is laid out in detail: platform audit, content pillars, weekly content calendar, paid media, creative production, KPIs, budget, and a week-by-week execution plan. A contents page at the front shows what is covered.",
+    note: "Sections 4, 5, 7 and 8 (content calendar, paid advertising, KPIs and budget) are blurred because they contain company-specific schedules, ad budgets and performance targets. Full plan available to discuss in conversation.",
+    thumb: "assets/img/work/zolar-strategy/zolar-strategy-01.jpg",
+    slides: [
+      "assets/img/work/zolar-strategy/zolar-strategy-01.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-02.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-03.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-04.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-05.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-06.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-07.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-08.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-09.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-10.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-11.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-12.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-13.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-14.jpg",
+      "assets/img/work/zolar-strategy/zolar-strategy-15.jpg"
+    ]
+  },
+
+  {
+    type: "carousel",
+    layout: "doc",
+    aspect: "1000 / 1415",
+    category: "Marketing Strategy",
+    client: "Royal Truck & Trailer Sales (Canada)",
+    title: "30-day launch strategy + 60-day roadmap",
+    description: "A marketing strategy prepared for Royal Truck & Trailer Sales Ltd., a Canadian commercial truck and trailer dealership in Brampton, Ontario. It covers a full account audit, competitor benchmarking, buyer personas, a week-by-week 30-day plan, four video campaign concepts, a content calendar, paid media, an onboarding checklist, KPIs, and a high-level roadmap for months 2 and 3.",
+    note: "Visible: cover, contents, buyer personas, Week 1 plan, one video campaign concept and the onboarding checklist. Blurred: the audit, benchmarking, Weeks 2–4, remaining video concepts, content calendar, paid ads, budget, KPIs, roadmap and executive summary, because they contain the company's account data, ad budgets and performance targets. Full strategy available to discuss in conversation.",
+    thumb: "assets/img/work/royal-strategy/royal-strategy-01.jpg",
+    slides: [
+      "assets/img/work/royal-strategy/royal-strategy-01.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-02.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-03.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-04.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-05.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-06.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-07.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-08.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-09.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-10.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-11.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-12.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-13.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-14.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-15.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-16.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-17.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-18.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-19.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-20.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-21.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-22.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-23.jpg",
+      "assets/img/work/royal-strategy/royal-strategy-24.jpg"
+    ]
   },
 
   // ---------- GRAPHIC DESIGN — Canadian market work ----------
